@@ -1,8 +1,8 @@
 // Interceptor decorator
-import { Controller } from '../ports/controller'
-import { IHttpRequest } from '../ports/http-request'
-import { IHttpResponse } from '../ports/http-response'
-import { Interceptor } from '../ports/interceptor'
+import { Controller } from '../application/ports/controller'
+import { IHttpRequest } from '../application/ports/http-request'
+import { IHttpResponse } from '../application/ports/http-response'
+import { Interceptor } from '../application/ports/interceptor'
 
 export function WithInterceptor<T>(interceptor: Interceptor<IHttpRequest, IHttpResponse>) {
   return function (_target: Controller<T>, _propertyKey: string, descriptor: PropertyDescriptor) {

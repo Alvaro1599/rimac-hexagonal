@@ -2,7 +2,7 @@ import { DynamoDBClient, PutItemCommand, GetItemCommand } from '@aws-sdk/client-
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb'
 
 import { DynamoDbClientProvider } from '../../../infrastructure/providers/dynamodb.provider'
-import { Vehicle } from '../../domain/models/Vehicle'
+import { Vehicle } from '../../domain/models/vehicle'
 import { VehicleRepository } from '../../domain/repositories/vehicleRepository'
 import { VehicleEntityMapper } from '../mappers/vehicle-entity.mapper'
 

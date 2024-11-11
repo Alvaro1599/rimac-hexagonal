@@ -1,5 +1,5 @@
 import { UseCase } from '../../../../shared/application/use-cases/use-case'
-import { Vehicle } from '../../../domain/models/Vehicle'
+import { Vehicle } from '../../../domain/models/vehicle'
 import { VehicleRepository } from '../../../domain/repositories/vehicleRepository'
 import { GetVehicleInput } from '../../dtos/get-vehicle.input'
 import { BaseValidator } from '../../validators/abstract/base.validator'

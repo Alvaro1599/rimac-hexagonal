@@ -1,4 +1,4 @@
-import { Vehicle } from '../models/Vehicle'
+import { Vehicle } from '../models/vehicle'
 
 export interface VehicleService {
   saveVehicle(card: Vehicle): Promise<Vehicle>

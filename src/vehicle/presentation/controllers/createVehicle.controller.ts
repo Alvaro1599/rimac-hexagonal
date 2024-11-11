@@ -6,7 +6,7 @@ import { IHttpRequest } from '../../application/ports/http-request'
 import { IHttpResponse } from '../../application/ports/http-response'
 import { CreateVehicleUseCase } from '../../application/use-cases/get-vehicle/create-vehicle-use.case'
 import { WithInterceptor } from '../../decorators/interceptor.decorator'
-import { Vehicle } from '../../domain/models/Vehicle'
+import { Vehicle } from '../../domain/models/vehicle'
 import { ErrorInterceptor } from '../interceptors/error.interceptor'
 import { OkHttpResponse } from '../responses/http-response'
 
