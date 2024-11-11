@@ -1,6 +1,6 @@
 import { IsOptional, IsString } from 'class-validator'
 
-import { Vehicle } from '../../domain/models/Vehicle'
+import { Vehicle } from '../../domain/models/vehicle'
 
 export class GetVehicleInput implements Partial<Vehicle> {
   @IsOptional()

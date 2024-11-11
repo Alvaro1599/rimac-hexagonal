@@ -16,7 +16,7 @@ export class CreateVehicleController implements Controller<Partial<Vehicle>> {
   async handleRequest(request: IHttpRequest<CreateVehicleInput>): Promise<IHttpResponse<Partial<Vehicle>>> {
     console.log('CreateVehicleController.handleRequest', request)
     const { body } = request
-    const { passengersQuantity, vehicleClass, name, model } = await this.createVehicleUseCase.execute(body)
-    return new OkHttpResponse({ passengersQuantity, vehicleClass, name, model })
+    const { id, passengersQuantity, vehicleClass, name, model } = await this.createVehicleUseCase.execute(body)
+    return new OkHttpResponse({ id, passengersQuantity, vehicleClass, name, model })
   }
 }

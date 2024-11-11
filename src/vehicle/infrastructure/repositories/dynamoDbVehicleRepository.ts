@@ -18,12 +18,12 @@ export class DynamoDbVehicleRepository implements VehicleRepository {
     this.tableName = DynamoDbClientProvider.tableName
   }
 
-  async getByName(vehicleName: string): Promise<Vehicle> {
+  async getById(vehicleId: string): Promise<Vehicle> {
     const params = {
       TableName: this.tableName,
       Key: marshall({
-        PK: `VEHICLE#${vehicleName}`,
-        SK: `VEHICLE#${vehicleName}`
+        PK: `VEHICLE#${vehicleId}`,
+        SK: `VEHICLE#${vehicleId}`
       })
     }
 
@@ -31,9 +31,10 @@ export class DynamoDbVehicleRepository implements VehicleRepository {
 
     if (!Item) return undefined
 
-    const { name, model, vehicleClass, passengersQuantity } = unmarshall(Item)
+    const { id, name, model, vehicleClass, passengersQuantity } = unmarshall(Item)
 
     return this.mapper.toDomainModel({
+      id,
       name,
       model,
       vehicleClass,
@@ -47,8 +48,8 @@ export class DynamoDbVehicleRepository implements VehicleRepository {
     const params = {
       TableName: this.tableName,
       Item: marshall({
-        PK: `VEHICLE#${vehicleData.name}`,
-        SK: `VEHICLE#${vehicleData.name}`,
+        PK: `VEHICLE#${vehicleData.id}`,
+        SK: `VEHICLE#${vehicleData.id}`,
         ...vehicleData,
         EntityType: 'VEHICLE'
       })

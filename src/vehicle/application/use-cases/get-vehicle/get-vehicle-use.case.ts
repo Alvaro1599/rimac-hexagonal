@@ -12,6 +12,6 @@ export class GetVehicleUseCase implements UseCase<GetVehicleInput, Vehicle> {
 
   async execute(input: GetVehicleInput): Promise<Vehicle> {
     this.validator.validateAndThrow(GetVehicleInput, input)
-    return await this.vehicleRepository.getByName(input.name)
+    return await this.vehicleRepository.getById(input.name)
   }
 }
