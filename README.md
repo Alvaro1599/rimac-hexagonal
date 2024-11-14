@@ -1,8 +1,9 @@
 #  Serverless - Backend TypeScript - Rimac 
 
 ## Estructura del proyecto
-![alt text](https://alvarobuckettest123.s3.amazonaws.com/architecture-alvaro.png)
+
 - [`/iac`](./iac): Esta carpeta contiene la configuración de Infraestructura como código (IaC) en este caso Serverless.
+
 - [`/src/name_module/`](./src): El directorio contiene el código fuente de la API (backend) del proyecto. Este directorio está organizado en varios subdirectorios, cada uno con su finalidad específica:
     - `aplication` : Contiene la capa de aplicación de la API, incluidos casos de uso, validadores, DTO y funciones de utilidad. Es responsable de procesar la entrada, ejecutar la lógica empresarial y generar respuestas.
     - `domain` : Contiene la capa de dominio de la API, incluidos modelos de dominio, repositorios, etc. Esta capa representa la lógica empresarial central y las reglas de la aplicación.
@@ -14,10 +15,11 @@
 
 > **Requerimientos**: NodeJS `(v.18.18.0)` para instalar las dependencias es necesario usar Yarn`(v1.22.19)`.
 
+- Asegurarse de tener aws cli instalado y configurar sus credenciales las cuales deben tener accesos de administrador para evitar tener problemas con los permisos.
 - Ejecutar `yarn` para instalar todas las dependencias
 
 ## Comandos offline
-- > **Es necesario hacer el deploy de la infraestructura en AWS**: `yarn deploy`, para poder crear la tabla en dynamoDB y usarla en la aplicación offline.
+- > **Es necesario hacer el deploy de la infraestructura en AWS**: `yarn deploy`, para poder crear la tabla en DynamoDB y usarla en la aplicación offline.
 - > **Compilar y correr el proyecto en entorno local:**:  `yarn offline` se hace la compilación en la carpeta [`/esbuild`](./.esbuild)
 - > ***Importante***! Se debe tener el puerto 3000 libre o si no se debe especificar en la variable de entorno `PORT`
 
