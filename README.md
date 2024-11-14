@@ -16,11 +16,13 @@
 
 - Ejecutar `yarn` para instalar todas las dependencias
 
-## Comandos
+## Comandos offline
 - > **Es necesario hacer el deploy de la infraestructura en AWS**: `yarn deploy`, para poder crear la tabla en dynamoDB y usarla en la aplicación offline.
 - > **Compilar y correr el proyecto en entorno local:**:  `yarn offline` se hace la compilación en la carpeta [`/esbuild`](./.esbuild)
-- > **Ejecutar los test de forma local**:`yarn test`
 - > ***Importante***! Se debe tener el puerto 3000 libre o si no se debe especificar en la variable de entorno `PORT`
+
+## Comandos en producción
+- > **Solo es necesario ejecutar:**  `yarn deploy` crearán los recursos (DynamoDB, Apigateway, Lambda function) y devolverán los endpoints de la API.
 
 ***Made by Alvaro :)***
 
