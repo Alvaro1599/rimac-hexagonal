@@ -8,6 +8,10 @@ export const handleProxy: AWSFunctions = {
   },
   'get-vehicle': {
     handler: Helpers.handlerPath('vehicle/infrastructure/handlers/vehicle-api-index.getVehicle'),
-    events: [Helpers.httpApiEvent('GET', 'vehicle')]
+    events: [Helpers.httpApiEvent('GET', 'vehicle/{id}')]
+  },
+  'get-vehicles': {
+    handler: Helpers.handlerPath('vehicle/infrastructure/handlers/vehicle-api-index.getVehicles'),
+    events: [Helpers.httpApiEvent('GET', 'vehicles')]
   }
 }

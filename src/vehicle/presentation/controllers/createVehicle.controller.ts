@@ -1,5 +1,3 @@
-import * as console from 'node:console'
-
 import { CreateVehicleInput } from '../../application/dtos/create-vehicle.input'
 import { Controller } from '../../application/ports/controller'
 import { IHttpRequest } from '../../application/ports/http-request'
@@ -14,7 +12,6 @@ export class CreateVehicleController implements Controller<Partial<Vehicle>> {
   constructor(private readonly createVehicleUseCase: CreateVehicleUseCase) {}
   @WithInterceptor(new ErrorInterceptor())
   async handleRequest(request: IHttpRequest<CreateVehicleInput>): Promise<IHttpResponse<Partial<Vehicle>>> {
-    console.log('CreateVehicleController.handleRequest', request)
     const { body } = request
     const { id, passengersQuantity, vehicleClass, name, model } = await this.createVehicleUseCase.execute(body)
     return new OkHttpResponse({ id, passengersQuantity, vehicleClass, name, model })

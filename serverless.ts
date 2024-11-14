@@ -12,6 +12,7 @@ const serverlessConfiguration: AWS = {
     stage: ENV_VALUES.STAGE,
     region: ENV_VALUES.AWS_REGION,
     runtime: 'nodejs18.x',
+    timeout: 30,
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true

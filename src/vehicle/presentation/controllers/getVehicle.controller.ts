@@ -17,12 +17,12 @@ export class GetVehicleController implements Controller<Partial<Vehicle>> {
 
   @WithInterceptor(new ErrorInterceptor())
   async handleRequest(
-    request: IHttpRequest<undefined, undefined, GetVehicleInput>
+    request: IHttpRequest<undefined, GetVehicleInput, GetVehicleInput>
   ): Promise<IHttpResponse<Partial<Vehicle>>> {
-    const { query } = request
-    let vehicle = await this.getVehicleUseCase.execute({ ...query })
+    const { params } = request
+    let vehicle = await this.getVehicleUseCase.execute({ ...params })
     if (!vehicle) {
-      vehicle = await this.swapiVehicleServiceAdapter.getMovie(query.name)
+      vehicle = await this.swapiVehicleServiceAdapter.getMovie(params.id)
       if (!vehicle) return new NoContentHttpResponse({})
     }
     return new OkHttpResponse(vehicle)

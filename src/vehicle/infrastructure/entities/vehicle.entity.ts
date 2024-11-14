@@ -4,7 +4,7 @@ export class Vehicle {
   readonly model: string
   readonly passengersQuantity: number
   readonly vehicleClass: string
-  constructor({ id, name, model, passengersQuantity, vehicleClass }: Partial<Vehicle>) {
+  constructor({ id = crypto.randomUUID(), name, model, passengersQuantity, vehicleClass }: Vehicle) {
     this.id = id
     this.name = name
     this.model = model

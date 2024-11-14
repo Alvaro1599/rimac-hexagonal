@@ -1,4 +1,4 @@
-import { DynamoDBClient, PutItemCommand, GetItemCommand } from '@aws-sdk/client-dynamodb'
+import { DynamoDBClient, GetItemCommand, PutItemCommand, QueryCommand } from '@aws-sdk/client-dynamodb'
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb'
 
 import { DynamoDbClientProvider } from '../../../infrastructure/providers/dynamodb.provider'
@@ -42,6 +42,28 @@ export class DynamoDbVehicleRepository implements VehicleRepository {
     })
   }
 
+  async getAll(): Promise<Vehicle[]> {
+    const params = {
+      TableName: this.tableName,
+      KeyConditionExpression: 'EntityType = :entityType',
+      IndexName: 'EntityTypeIndex',
+      ExpressionAttributeValues: {
+        ':entityType': { S: 'VEHICLE' }
+      }
+    }
+    const { Items } = await this.dynamoDbClient.send(new QueryCommand(params))
+    return Items.map((item) => {
+      const { id, name, model, vehicleClass, passengersQuantity } = unmarshall(item)
+      return this.mapper.toDomainModel({
+        id,
+        name,
+        model,
+        vehicleClass,
+        passengersQuantity
+      })
+    })
+  }
+
   async save(entity: Vehicle): Promise<Vehicle> {
     const vehicleData = this.mapper.toPersistenceEntity(entity)
 
@@ -56,6 +78,6 @@ export class DynamoDbVehicleRepository implements VehicleRepository {
     }
 
     await this.dynamoDbClient.send(new PutItemCommand(params))
-    return entity
+    return this.mapper.toDomainModel(vehicleData)
   }
 }

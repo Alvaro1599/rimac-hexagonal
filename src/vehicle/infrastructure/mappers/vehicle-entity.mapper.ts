@@ -8,8 +8,15 @@ export class VehicleEntityMapper implements IMapper<Partial<VehicleEntity>, Vehi
     return new Vehicle({ id, model, vehicleClass, passengersQuantity, name })
   }
 
-  toPersistenceEntity(vehicle: Vehicle): Partial<Vehicle> {
-    const { model, vehicleClass, passengersQuantity, name } = vehicle
-    return new VehicleEntity({ model, vehicleClass, passengersQuantity, name })
+  toPersistenceEntity(vehicle: Vehicle): Vehicle {
+    const { model, vehicleClass, passengersQuantity, name, id } = vehicle
+    const entity = new VehicleEntity({
+      id,
+      model,
+      vehicleClass,
+      passengersQuantity,
+      name
+    })
+    return new Vehicle(entity)
   }
 }
