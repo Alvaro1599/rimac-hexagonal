@@ -14,7 +14,7 @@ interface SwapiVehicle {
 export class SwapiVehicleServiceAdapter implements VehicleServicePort {
   private readonly SWAPI_BASE_URL = 'https://swapi.dev/api/'
 
-  async getMovie(id: string): Promise<Vehicle> {
+  async getVehicle(id: string): Promise<Vehicle> {
     const url = `${this.SWAPI_BASE_URL}vehicles/${id}?format=json`
     try {
       const response = await axios.get<SwapiVehicle>(url)
@@ -47,7 +47,6 @@ export class SwapiVehicleServiceAdapter implements VehicleServicePort {
 
   private async getVehicleRecursively(url: string, vehicles: Vehicle[] = []): Promise<Vehicle[]> {
     const response = await axios.get<{ next: string; results: SwapiVehicle[] }>(url)
-    console.log(response.data.next, 'response')
     const allVehicles = [...vehicles, ...response.data.results]
     const newVehicles = allVehicles.map((vehicle) => {
       if (!(vehicle instanceof Vehicle)) {
@@ -72,7 +71,6 @@ export class SwapiVehicleServiceAdapter implements VehicleServicePort {
     const url = `${this.SWAPI_BASE_URL}vehicles?format=json`
     try {
       const data = await this.getVehicleRecursively(url)
-      console.log(data.length, 'data.length')
       return data
     } catch (e) {
       return []

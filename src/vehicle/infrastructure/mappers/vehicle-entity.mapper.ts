@@ -1,5 +1,6 @@
 import { IMapper } from './mapper'
 import { Vehicle } from '../../domain/models/vehicle'
+import { VehicleSpanish } from '../../domain/models/vehicle-spanish'
 import { Vehicle as VehicleEntity } from '../entities/vehicle.entity'
 
 export class VehicleEntityMapper implements IMapper<Partial<VehicleEntity>, Vehicle> {
@@ -18,5 +19,16 @@ export class VehicleEntityMapper implements IMapper<Partial<VehicleEntity>, Vehi
       name
     })
     return new Vehicle(entity)
+  }
+
+  toSpanishModel(vehicle: Vehicle): VehicleSpanish {
+    const { model, vehicleClass, passengersQuantity, name, id } = vehicle
+    return new VehicleSpanish({
+      model,
+      vehicleClass,
+      passengersQuantity,
+      name,
+      id
+    })
   }
 }
