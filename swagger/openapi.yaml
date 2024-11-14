@@ -1,0 +1,120 @@
+openapi: 3.0.1
+servers:
+  - url: http://localhost:3000
+info:
+  title: Vehicle API
+  description: API para manejar vehículos
+  version: 1.0.0
+paths:
+  /vehicle:
+    post:
+      summary: Crear un nuevo vehículo
+      operationId: createVehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVehicleInput'
+      responses:
+        '201':
+          description: Vehículo creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+        '400':
+          description: Error en la validación de datos
+
+  /vehicle/{id}:
+    get:
+      summary: Obtener un vehículo por ID
+      operationId: getVehicle
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del vehículo
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Vehículo encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+        '404':
+          description: Vehículo no encontrado
+
+  /vehicles:
+    get:
+      summary: Obtener todos los vehículos
+      operationId: getVehicles
+      parameters:
+        - name: id
+          in: query
+          description: Filtro por ID (opcional)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de vehículos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vehicle'
+
+components:
+  schemas:
+    CreateVehicleInput:
+      type: object
+      required:
+        - name
+        - model
+        - passengersQuantity
+        - vehicleClass
+      properties:
+        name:
+          type: string
+          example: "Vehicle 1"
+        model:
+          type: string
+          example: "Model X"
+        passengersQuantity:
+          type: integer
+          example: 4
+        vehicleClass:
+          type: string
+          example: "SUV"
+
+    GetVehicleInput:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "vehicle-123"
+
+    GetVehiclesInput:
+      type: object
+
+    Vehicle:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "vehicle-123"
+        name:
+          type: string
+          example: "Vehicle 1"
+        model:
+          type: string
+          example: "Model X"
+        passengersQuantity:
+          type: integer
+          example: 4
+        vehicleClass:
+          type: string
+          example: "SUV"

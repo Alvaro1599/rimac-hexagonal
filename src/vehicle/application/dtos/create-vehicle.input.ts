@@ -1,8 +1,8 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
 
-import { Vehicle } from '../../domain/models/Vehicle'
+import { Vehicle } from '../../domain/models/vehicle'
 
-export class CreateVehicleInput implements Vehicle {
+export class CreateVehicleInput implements Partial<Vehicle> {
   @IsNotEmpty()
   @IsString()
   name: string
